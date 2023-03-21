@@ -1,0 +1,20 @@
+<ion-grid  class="ion-align-items-center">
+  <ion-row>
+    <ion-col size="12" size-sm="4" >
+      <img src="{{card.imagen}}" />
+    </ion-col>
+    <ion-col size="10" size-sm="6" >
+      <ion-card-title>{{card.nombre}}</ion-card-title>
+      <ion-card-content>{{card.descripcion}}</ion-card-content>
+      <ion-card-content>${{card.precio}}</ion-card-content>
+    </ion-col>
+    <ion-col size="2" size-sm="2" >
+      <ion-button fill="clear">
+        <ion-icon name="cart"></ion-icon>
+      </ion-button>
+      <ion-button (click)="Action(card, 'bottom')" fill="clear">
+        <ion-icon [name]="getIcon(card)" color="danger"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

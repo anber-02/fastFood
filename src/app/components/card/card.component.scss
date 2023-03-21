@@ -1,0 +1,31 @@
+ion-grid{
+  margin: 2px 5px;
+  margin-top: 5px;
+  // border: 1px solid rgba(0,0,0,.5);
+  align-content: center;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 0px rgba(0,0,0,.5);
+}
+
+ion-card-content{
+  padding: 10px 0 0 0;
+}
+ion-card-content:nth-child(3){
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+  // text-align: end;
+}
+
+
+img{
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+// ion-col:nth-child(1){
+//   background: #000;
+// }

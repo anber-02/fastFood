@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let card of favoritos">
+        <app-card  [card]="card"></app-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h1 *ngIf="favoritos.length < 1">No hay favoritos</h1>
+</ion-content>
