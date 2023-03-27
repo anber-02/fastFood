@@ -9,19 +9,6 @@
 
 <ion-content>
 
-  <!-- <form [formGroup]="productForm" (ngSubmit)="guardarProducto()">
-    <input formControlName="nombre" />
-    <input formControlName="descripcion" />
-    <input formControlName="precio" />
-    <input formControlName="imagen" />
-    <select id="category_id">
-      <option value="">Selecciona una categoria</option>
-      <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}</option>
-    </select>
-    <input type="submit" value="Enviar" />
-  </form> -->
-
-
   <ion-card>
     <ion-card-header color="warning"> Nuevo producto </ion-card-header>
     <form [formGroup]="productForm" (ngSubmit)="guardarProducto()">

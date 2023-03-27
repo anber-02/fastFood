@@ -9,12 +9,15 @@
       <ion-card-content>${{card.precio}}</ion-card-content>
     </ion-col>
     <ion-col size="2" size-sm="2" >
-      <ion-button fill="clear">
+      <ion-button fill="clear" (click)="agregarACarrito(card, 'bottom')">
         <ion-icon name="cart"></ion-icon>
       </ion-button>
       <ion-button (click)="Action(card, 'bottom')" fill="clear">
         <ion-icon [name]="getIcon(card)" color="danger"></ion-icon>
       </ion-button>
+      <!-- <ion-button fill="clear" (click)="handleDelete(card.id)">
+        <ion-icon name="trash" color="danger"></ion-icon>
+      </ion-button> -->
     </ion-col>
   </ion-row>
 </ion-grid>

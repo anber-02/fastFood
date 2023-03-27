@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CaritoServiceService } from '../../services/caritoServices/carito-service.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  total:any
+  constructor(
+    private carritoService:CaritoServiceService
+    ) {
+      this.getTotal()
+    }
 
-  constructor() {}
+    get carrito(){
+      return this.carritoService.localCards
+    }
+
+    getTotal(){
+      this.total = this.carritoService.getTotal()
+    }
 
 }

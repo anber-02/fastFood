@@ -12,7 +12,11 @@ export class ProductsPage implements OnInit {
 
   categorias: any;
   productForm: FormGroup = new FormGroup({});
-  constructor(private formBuilder: FormBuilder, private foodService: FoodServiceService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private foodService: FoodServiceService, 
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
@@ -32,7 +36,9 @@ export class ProductsPage implements OnInit {
     if (this.productForm.valid) {
       this.foodService.createProduct(this.productForm.value).subscribe((data)=>{
         console.log(data)
-        this.router.navigate(['/tabs/tab3'])
+        if(data){
+          this.router.navigate(['/tabs/tab3'])
+        }
       })
     }
   }

@@ -41,4 +41,13 @@ export class FoodServiceService {
   createCategory(data:any){
     this.http.post(`${environment.apiURL}/nuevaCategoria`, data).subscribe(d => console.log(d))
   }
+
+  deleteProduct(id:number){
+    return this.http.delete(`${environment.apiURL}/deleteProduct/${id}`)
+    .pipe(
+      tap(()=>{
+        this._refresh.next()
+      })
+    )
+  }
 }
