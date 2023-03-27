@@ -41,7 +41,7 @@ export class CardComponent implements OnInit {
   async presentToast(message: string, position: 'bottom' | 'top', icon:string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
+      duration: 1500,
       position: position,
       icon: icon
     })

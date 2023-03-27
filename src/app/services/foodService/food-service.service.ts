@@ -43,7 +43,7 @@ export class FoodServiceService {
   }
 
   deleteProduct(id:number){
-    return this.http.delete(`${environment.apiURL}/deleteProduct/${id}`)
+    return this.http.delete(`${environment.apiURL}/product/${id}`)
     .pipe(
       tap(()=>{
         this._refresh.next()
