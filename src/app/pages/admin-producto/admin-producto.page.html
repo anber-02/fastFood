@@ -22,10 +22,10 @@
               <ion-card-title>{{card.nombre}}</ion-card-title>
             </ion-col>
             <ion-col size="2" size-sm="2">
-              <ion-button fill="clear" (click)="deleteProduct(card.id)">
+              <ion-button fill="clear" (click)="presentAlert(card.id)">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
-              <ion-button fill="clear">
+              <ion-button fill="clear" routerLink="/products" [queryParams]="{id:card.id}">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
             </ion-col>

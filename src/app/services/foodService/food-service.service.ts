@@ -19,6 +19,11 @@ export class FoodServiceService {
     return this._refresh
   }
 
+
+  getProductById(id:string){
+    return this.http.get(`${environment.apiURL}/product/${id}`)
+  }
+
   getCards():Observable<Product>{
     return this.http.get<Product>(`${environment.apiURL}/products`);
   }
@@ -32,6 +37,11 @@ export class FoodServiceService {
         }
       )
     )
+  }
+
+  updateProduct(data:Product, id:string){
+    console.log(id)
+    return this.http.put(`${environment.apiURL}/product/${id}`, data)
   }
 
   getCategories(){
