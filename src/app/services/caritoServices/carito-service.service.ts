@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,13 @@ export class CaritoServiceService {
   existe: any;
   totalGeneral:any;
   delete = true;
+
+  private _refresh = new Subject<void>()
+  get refresh(){
+    return this._refresh
+  }
+
+
   constructor() {
     this.cargarCarrito();
   }
@@ -35,10 +43,9 @@ export class CaritoServiceService {
         total: card.precio
       }
       this.miCarrito = [newProd, ...this.miCarrito]
-      // this.delete = false;
-      // this.miCarrito.unshift(card); //el unshift coloca el elemento al principio del array
     }
     localStorage.setItem('carrito', JSON.stringify(this.miCarrito));
+    this._refresh.next()
     return this.delete
   }
 
@@ -47,14 +54,23 @@ export class CaritoServiceService {
   }
 
   eliminarProdCarrito(card:any){
+    console.log(card,'card')
+    console.log(this.existe,'existre')
     if(this.existe){
       this.existe.cantidad -= 1;
-      this.existe.total = this.existe.cantidad * this.existe.precio
-
-      this.miCarrito = this.miCarrito.filter(c => c.id !== card.id)
-      this.miCarrito = [this.existe, ...this.miCarrito]
-      localStorage.setItem('carrito', JSON.stringify(this.miCarrito));
+      if(this.existe.cantidad <= 0){
+        this.miCarrito = this.miCarrito.filter(c => c.id !== card.id)
+        localStorage.setItem('carrito', JSON.stringify(this.miCarrito));
+        console.log('aqui pasa algo creo')
+      }else{
+        this.existe.total = this.existe.cantidad * this.existe.precio
+        this.miCarrito = this.miCarrito.filter(c => c.id !== card.id)
+        this.miCarrito = [this.existe, ...this.miCarrito]
+        localStorage.setItem('carrito', JSON.stringify(this.miCarrito));
+      }
     }
+    this._refresh.next()
+
   }
 
   get localCards() {

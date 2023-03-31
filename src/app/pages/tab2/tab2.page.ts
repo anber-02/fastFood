@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CaritoServiceService } from '../../services/caritoServices/carito-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -8,9 +9,14 @@ import { CaritoServiceService } from '../../services/caritoServices/carito-servi
 })
 export class Tab2Page {
   total:any
+  subscription!:Subscription
   constructor(
     private carritoService:CaritoServiceService
     ) {
+      this.carritoService.refresh.subscribe(data => {
+        console.log('se agrego o elimino algo')
+        this.getTotal()
+      })
       this.getTotal()
     }
 

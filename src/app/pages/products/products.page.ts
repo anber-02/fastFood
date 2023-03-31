@@ -29,6 +29,11 @@ export class ProductsPage implements OnInit {
   ngOnInit() {
     this.initialForms()
     this.getCategories()
+
+    // this.activatedRouter.params.subscribe((params:any)=>{
+    //   console.log(params, 'hola ')
+    //   // this.productForm.reset(food) para rellenar el formulario
+    // })
     this.id = this.activatedRouter.snapshot.queryParamMap.get('id')
     this.getProductById()
   }
@@ -54,11 +59,11 @@ export class ProductsPage implements OnInit {
 
   initialForms() {
     this.productForm = this.formBuilder.group({
-      nombre: [this.id ? this.product.nombre:'', Validators.required],
-      descripcion: [this.id ? this.product.descripcion:'', Validators.required],
-      precio: [this.id ? this.product.precio:'', Validators.required],
-      imagen: [this.id ? this.product.imagen:'', Validators.required],
-      category_id: [this.id ? this.product.category_id:'', Validators.required]
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      precio: ['', Validators.required],
+      imagen: ['', Validators.required],
+      category_id: ['', Validators.required]
     })
   }
   getCategories() {
@@ -73,9 +78,10 @@ export class ProductsPage implements OnInit {
   getProductById(){
     if(this.id){
       this.foodService.getProductById(this.id).subscribe((data:any) => {
-        this.product = data
-        console.log(data)
-        this.initialForms()
+        // this.product = data
+        console.log(data, 'dentro de product')
+        this.productForm.reset(data)//resetea el formulario y lo rellena con los datos recicbidos
+        // this.initialForms()
       })
     }
   }

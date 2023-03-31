@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FoodServiceService } from '../../services/foodService/food-service.service';
-import { Product } from '../../models/product.model';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { AlertServiceService } from '../../services/alert-service.service';
+
 
 @Component({
   selector: 'app-admin-producto',
@@ -11,13 +12,14 @@ import { Subscription } from 'rxjs';
 })
 export class AdminProductoPage implements OnInit, OnDestroy {
 
-  product:any[] = [];
-  subscription!:Subscription
+  product: any[] = [];
+  subscription!: Subscription
+
   constructor(
-    private foodService:FoodServiceService,
-    private toastController:ToastController,
-    private alertController:AlertController
-    ) { }
+    private foodService: FoodServiceService,
+    private toastController: ToastController,
+    private alertService: AlertServiceService
+  ) { }
 
   ngOnInit() {
     this.getProducts()
@@ -27,23 +29,28 @@ export class AdminProductoPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe()
-      // cerrando el observable
+    this.subscription.unsubscribe()
+    // cerrando el observable
   }
 
-  getProducts(){
-    this.foodService.getCards().subscribe((data:any) => {
+  getProducts() {
+    this.foodService.getCards().subscribe((data: any) => {
       this.product = data
     })
   }
 
-  deleteProduct(id:number){
-    this.foodService.deleteProduct(id).subscribe((data:any)=>{
-      this.presentToast(data[0], 'bottom', 'trash')
-    })
+  deleteProduct(id: number) {
+    this.alertService.confirmar('ELiminar', 'Esta seguro de eliminar')
+      .then((res: any) => {
+        if (res.data) {
+          this.foodService.deleteProduct(id).subscribe((data: any) => {
+            this.presentToast(data[0], 'bottom', 'trash')
+          })
+        }
+      })
   }
 
-  async presentToast(message: string, position: 'bottom' | 'top', icon:string) {
+  async presentToast(message: string, position: 'bottom' | 'top', icon: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 1500,
@@ -52,17 +59,4 @@ export class AdminProductoPage implements OnInit, OnDestroy {
     })
     await toast.present()
   }
-
-  async presentAlert(id:number){
-    const alert = await this.alertController.create({
-      header: "Esta seguro de eliminar este producto",
-      mode: 'ios',
-      buttons: [
-        {text: 'continuar', handler: () => this.deleteProduct(id)},
-        {text:'cancelar', handler: ()=>{console.log('accion cancelada')}}
-      ]
-    })
-    await alert.present()
-  }
-
 }
