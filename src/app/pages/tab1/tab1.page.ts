@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  books:any
+  constructor(private bookService:BookService) {
+    this.bookService.getBooks().subscribe((data:any) => {
+      this.books = data.data
+    })
+  }
+
+  handleDelete(id:any){
+    this.bookService.deleteBook(id).subscribe(data=>{
+      console.log(data)
+    })
+  }
 
 }
+

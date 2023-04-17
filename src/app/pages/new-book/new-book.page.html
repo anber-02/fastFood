@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>newBook</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header color="warning"> Nuevo producto </ion-card-header>
+    <form [formGroup]="bookForm" (ngSubmit)="guardarProducto()">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating"> Autor</ion-label>
+        <ion-input formControlName="author" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">editoral</ion-label>
+        <ion-input formControlName="editorial" type="text"></ion-input>
+      </ion-item>
+      <ion-button horizontal="center" block color="primary" type="submit">
+        Agregar
+      </ion-button>
+    </form>
+  </ion-card>
+</ion-content>

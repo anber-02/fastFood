@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'admin-producto',
     loadChildren: () => import('./pages/admin-producto/admin-producto.module').then( m => m.AdminProductoPageModule)
+  },
+  {
+    path: 'new-book',
+    loadChildren: () => import('./pages/new-book/new-book.module').then( m => m.NewBookPageModule)
   }
 ];
 @NgModule({
